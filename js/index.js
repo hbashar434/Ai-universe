@@ -1,8 +1,12 @@
 const loadAiData = (cardLimit = 6) => {
+  document.getElementById("load-spinner").classList.remove("hidden");
   const url = `https://openapi.programming-hero.com/api/ai/tools`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayAiData(data.data.tools, cardLimit));
+    .then((data) => {
+      document.getElementById("load-spinner").classList.add("hidden");
+      displayAiData(data.data.tools, cardLimit);
+    });
 };
 
 const displayAiData = (data, cardLimit) => {
