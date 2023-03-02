@@ -11,8 +11,8 @@ const displayAiData = (data) => {
     const { name, image, features, published_in } = singleCard;
     cardContainer.innerHTML += `
         <div class="aiCard rounded">
-         <div class="card w-full h-full bg-base-100 shadow-xl">
-            <figure><img src="${image}"/>
+         <div class="card w-full h-full bg-base-100 shadow-xl p-3">
+            <figure><img class="rounded-lg" src="${image}"/>
             </figure>
             <div class="card-body">
                 <h2 class="card-title">Features</h2>
