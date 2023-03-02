@@ -4,8 +4,9 @@ const loadAiData = (cardLimit = 6) => {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      document.getElementById("load-spinner").classList.add("hidden");
       displayAiData(data.data.tools, cardLimit);
+      document.getElementById("load-spinner").classList.add("hidden");
+      document.getElementById("see-more-section").classList.remove("hidden");
     });
 };
 
@@ -18,7 +19,7 @@ const displayAiData = (data, cardLimit) => {
     cardContainer.innerHTML += `
         <div class="aiCard rounded">
          <div class="card w-full h-full bg-base-100 shadow-xl p-3">
-            <figure><img class="rounded-lg" src="${image}"/>
+            <figure><img class="rounded-lg h-48" src="${image}"/>
             </figure>
             <div class="card-body">
                 <h2 class="card-title">Features</h2>
