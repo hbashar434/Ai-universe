@@ -1,13 +1,15 @@
-const loadAiData = () => {
+const loadAiData = (cardLimit = 6) => {
   const url = `https://openapi.programming-hero.com/api/ai/tools`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayAiData(data.data.tools));
+    .then((data) => displayAiData(data.data.tools, cardLimit));
 };
 
-const displayAiData = (data) => {
+const displayAiData = (data, cardLimit) => {
   const cardContainer = document.getElementById("card-section");
-  data.forEach((singleCard) => {
+  cardContainer.textContent = "";
+  const dataLimit = data.slice(0, cardLimit ? cardLimit : data.length);
+  dataLimit.forEach((singleCard) => {
     const { name, image, features, published_in } = singleCard;
     cardContainer.innerHTML += `
         <div class="aiCard rounded">
@@ -38,6 +40,12 @@ const displayAiData = (data) => {
         </div>
     `;
   });
+};
+
+const seeMore = () => {
+  loadAiData(0);
+  const showAll = document.getElementById("show-all");
+  showAll.classList.add("hidden");
 };
 
 loadAiData();
