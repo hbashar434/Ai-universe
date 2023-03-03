@@ -16,6 +16,7 @@ const displayAiData = (data, cardLimit) => {
   const dataLimit = data.slice(0, cardLimit ? cardLimit : data.length);
   dataLimit.forEach((singleCard) => {
     const { id, name, image, features, published_in } = singleCard;
+
     cardContainer.innerHTML += `
         <div class="aiCard rounded">
          <div class="card w-full h-full bg-base-100 shadow-xl p-3">
@@ -30,6 +31,15 @@ const displayAiData = (data, cardLimit) => {
                     <li>${features[2]}</li>
                     <ol>
                 </div>
+
+
+                <div>
+                <ol class="list-decimal">
+                 
+                <ol>
+                </div>
+
+
                 <hr class="my-4">
                 <div class="flex justify-between items-center">
                     <div>
@@ -48,6 +58,7 @@ const displayAiData = (data, cardLimit) => {
     `;
   });
 };
+
 
 const fetchAiModal = (id) => {
   const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
@@ -74,20 +85,16 @@ const displayAiModal = (data) => {
       <h1 class="text-xl font-semibold">${description}</h1>
       <div class="flex justify-between gap-2 my-4 font-semibold text-center">
         <div class="card bg-white text-green-500 p-2 w-full h-full">
-          <span class="mt-2">${
-            pricing[0].price ? pricing[0].price : "Free of Cost"
-          }</span> 
-          <span>${pricing[0].plan}</span>
+          <span class="mt-2">${pricing?.[0].price}</span> 
+          <span>${pricing?.[0].plan}</span>
         </div>
         <div class="card bg-white text-amber-500 p-2 w-full h-full">
-          <span class="mt-2" >${
-            pricing[1].price ? pricing[1].price : "Free of Cost"
-          }</span> 
-          <span>${pricing[1].plan}</span>
+          <span class="mt-2" >${pricing?.[1].price}</span> 
+          <span>${pricing?.[1].plan}</span>
         </div>
         <div class="card bg-white text-red-500 p-2 w-full h-full">
-          <span>${pricing[2].price ? pricing[2].price : "Free of Cost"}</span> 
-          <span>${pricing[2].plan}</span>
+          <span>${pricing?.[2].price}</span> 
+          <span>${pricing?.[2].plan}</span>
         </div>
       </div>
 
@@ -108,13 +115,13 @@ const displayAiModal = (data) => {
               <div class="ml-5 text-sm">
                   <ul class="list-disc">
                       <li>${
-                        integrations[0] ? integrations[0] : "No data Found"
+                        integrations?.[0] ? integrations[0] : "No data Found"
                       }</li>
                       <li>${
-                        integrations[1] ? integrations[1] : "No data Found"
+                        integrations?.[1] ? integrations[1] : "No data Found"
                       }</li>
                       <li>${
-                        integrations[2] ? integrations[2] : "No data Found"
+                        integrations?.[2] ? integrations[2] : "No data Found"
                       }</li>
                   <ul>
               </div> 
@@ -124,17 +131,23 @@ const displayAiModal = (data) => {
 
 
     <div class="card border p-4 modal-right">
-    <div id="accuracy-badge" class=" rounded w-3/12 bg-red-600 text-center text-xs font-semibold p-1 text-white relative top-8 left-64 ">${
-      score ? score : ""
-    }% accuracy</div>
+    <div id="accuracy-badge">${
+      score
+        ? `<span class=" rounded w-3/12 bg-red-600 text-center text-xs font-semibold p-1 text-white relative top-8 left-64">${score}% accuracy</span>`
+        : ""
+    }</div>
       <figure>
       <img class="rounded-lg h-48" src="${image_link[0]}"/>
       </figure>
       <div class="mt-8 text-center p-8">
-        <p class="font-bold text-xl mb-4">${input_output_examples[0].input}</p>
+        <p class="font-bold text-xl mb-4">${
+          input_output_examples?.[0].input
+            ? input_output_examples[0].input
+            : "Can you give any example?"
+        }</p>
         <p>${
-          input_output_examples[0].output
-            ? input_output_examples[0].output
+          input_output_examples?.[0].output
+            ? input_output_examples[0]?.output
             : "No! Not Yet! Take a break!!!"
         }</p>
       </div>
