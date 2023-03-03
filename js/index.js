@@ -66,6 +66,7 @@ const displayAiModal = (data) => {
     features,
     integrations,
     input_output_examples,
+    accuracy: { score },
   } = data;
 
   modalDetails.innerHTML += `
@@ -113,11 +114,11 @@ const displayAiModal = (data) => {
 
 
     <div class="card border p-4 modal-right">
+    <div id="accuracy" class="rounded w-3/12 bg-red-600 text-center text-xs font-semibold p-1 text-white relative top-8 left-64 ">${score}% accuracy</div>
       <figure>
       <img class="rounded-lg h-48" src="${image_link[0]}"/>
       </figure>
-      <div class="badge badge-secondary relative bottom-44 left-80">NEW</div>
-      <div class="mt-10 text-center p-8">
+      <div class="mt-8 text-center p-8">
         <p class="font-bold text-xl mb-4">${input_output_examples[0].input}</p>
         <p>${input_output_examples[0].output}</p>
       </div>
