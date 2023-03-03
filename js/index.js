@@ -15,7 +15,7 @@ const displayAiData = (data, cardLimit) => {
   cardContainer.textContent = "";
   const dataLimit = data.slice(0, cardLimit ? cardLimit : data.length);
   dataLimit.forEach((singleCard) => {
-    const { name, image, features, published_in } = singleCard;
+    const { id, name, image, features, published_in } = singleCard;
     cardContainer.innerHTML += `
         <div class="aiCard rounded">
          <div class="card w-full h-full bg-base-100 shadow-xl p-3">
@@ -37,7 +37,9 @@ const displayAiData = (data, cardLimit) => {
                     <p><i class="fa-sharp fa-regular fa-calendar"></i>  ${published_in}</p>
                     </div>
                     <div>
-                    <i class="fa-solid fa-arrow-right text-red-700"></i>
+                    <label for="my-modal-3">
+                    <i class="fa-solid fa-arrow-right text-red-700 cursor-pointer" onclick="fetchAiModal('${id}')"></i>
+                    </label>
                     </div>
                 </div>
             </div>
@@ -45,6 +47,51 @@ const displayAiData = (data, cardLimit) => {
         </div>
     `;
   });
+};
+
+const fetchAiModal = (id) => {
+  const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => displayAiModal(data.data));
+};
+
+const displayAiModal = (data) => {
+  const modalDetails = document.getElementById("modal-details");
+  modalDetails.textContent = "";
+  const {
+    description,
+    image_link,
+    pricing,
+    features,
+    integrations,
+    input_output_examples,
+  } = data;
+
+  modalDetails.innerHTML += `
+    <div class="card border-2 border-red-300 bg-red-100 p-4 modal-left">
+      <h1 class="text-xl font-semibold">${description}</h1>
+      <div class="flex justify-between my-4 font-semibold text-center">
+        <div class="card bg-white p-4">
+          <span>${pricing[0].price}</span> 
+          <span>${pricing[0].plan}</span>
+        </div>
+        <div class="card bg-white p-4">
+          <span>${pricing[1].price}</span> 
+          <span>${pricing[1].plan}</span>
+        </div>
+        <div class="card bg-white p-4">
+          <span>${pricing[2].price}</span> 
+          <span>${pricing[2].plan}</span>
+        </div>
+      </div>            
+    </div>
+
+    <div class="card border p-4 modal-right">
+      <figure><img class="rounded-lg h-48" src="${image_link[0]}"/>
+      </figure>
+    </div>
+  `;
 };
 
 const seeMore = () => {
