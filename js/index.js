@@ -26,9 +26,18 @@ const displayAiData = (data, cardLimit) => {
                 <h2 class="card-title">Features</h2>
                 <div class="ml-5">
                     <ol class="list-decimal">
-                    <li>${features[0]}</li>
-                    <li>${features[1]}</li>
-                    <li>${features[2]}</li>
+                    <div>${
+                      features?.[0] ? `<li>${features?.[0]}</li>` : ""
+                    }</div>
+                    <div>${
+                      features?.[1] ? `<li>${features?.[1]}</li>` : ""
+                    }</div>
+                    <div>${
+                      features?.[2] ? `<li>${features?.[2]}</li>` : ""
+                    }</div>
+                    <div>${
+                      features?.[3] ? `<li>${features?.[3]}</li>` : ""
+                    }</div>
                     <ol>
                 </div>
 
@@ -59,7 +68,6 @@ const displayAiData = (data, cardLimit) => {
   });
 };
 
-
 const fetchAiModal = (id) => {
   const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
   fetch(url)
@@ -85,16 +93,22 @@ const displayAiModal = (data) => {
       <h1 class="text-xl font-semibold">${description}</h1>
       <div class="flex justify-between gap-2 my-4 font-semibold text-center">
         <div class="card bg-white text-green-500 p-2 w-full h-full">
-          <span class="mt-2">${pricing?.[0].price}</span> 
-          <span>${pricing?.[0].plan}</span>
+          <span class="mt-2">${
+            pricing?.[0].price ? pricing[0].price : "Free of Cost/"
+          }</span> 
+          <span>${pricing?.[0].plan ? pricing[0].plan : "Basic"}</span>
         </div>
         <div class="card bg-white text-amber-500 p-2 w-full h-full">
-          <span class="mt-2" >${pricing?.[1].price}</span> 
-          <span>${pricing?.[1].plan}</span>
+          <span class="mt-2" >${
+            pricing?.[1].price ? pricing[1].price : "Free of Cost/"
+          }</span> 
+          <span>${pricing?.[1].plan ? pricing[1].plan : "Pro"}</span>
         </div>
         <div class="card bg-white text-red-500 p-2 w-full h-full">
-          <span>${pricing?.[2].price}</span> 
-          <span>${pricing?.[2].plan}</span>
+          <span>${
+            pricing?.[2].price ? pricing[2].price : "Free of Cost/"
+          }</span> 
+          <span>${pricing?.[2].plan ? pricing[2].plan : "Enterprise"}</span>
         </div>
       </div>
 
@@ -102,10 +116,27 @@ const displayAiModal = (data) => {
           <div>
               <h1 class="text-xl font-semibold">Features</h1>
               <div class="ml-5 text-sm">
-                  <ul class="list-disc">
-                      <li>${features["1"].feature_name}</li>
-                      <li>${features["2"].feature_name}</li>
-                      <li>${features["3"].feature_name}</li>
+                    <ul class="list-disc">
+                        <div>${
+                          features?.[1]
+                            ? `<li>${features?.["1"].feature_name}</li>`
+                            : ""
+                        }</div>
+                        <div>${
+                          features?.[2]
+                            ? `<li>${features?.["2"].feature_name}</li>`
+                            : ""
+                        }</div>
+                        <div>${
+                          features?.[3]
+                            ? `<li>${features?.["3"].feature_name}</li>`
+                            : ""
+                        }</div>
+                        <div>${
+                          features?.[4]
+                            ? `<li>${features?.["4"].feature_name}</li>`
+                            : ""
+                        }</div>                           
                   <ul>
               </div> 
           </div>
@@ -114,15 +145,18 @@ const displayAiModal = (data) => {
               <h1 class="text-xl font-semibold">Integrations</h1>
               <div class="ml-5 text-sm">
                   <ul class="list-disc">
-                      <li>${
-                        integrations?.[0] ? integrations[0] : "No data Found"
-                      }</li>
-                      <li>${
-                        integrations?.[1] ? integrations[1] : "No data Found"
-                      }</li>
-                      <li>${
-                        integrations?.[2] ? integrations[2] : "No data Found"
-                      }</li>
+                      <div class="text-lg">${
+                        integrations === null ? "No Data Found" : ""
+                      }</div>
+                      <div>${
+                        integrations?.[0] ? `<li>${integrations?.[0]}</li>` : ""
+                      }</div>
+                      <div>${
+                        integrations?.[1] ? `<li>${integrations?.[1]}</li>` : ""
+                      }</div>
+                      <div>${
+                        integrations?.[2] ? `<li>${integrations?.[2]}</li>` : ""
+                      }</div>
                   <ul>
               </div> 
           </div>
@@ -133,11 +167,13 @@ const displayAiModal = (data) => {
     <div class="card border p-4 modal-right">
     <div id="accuracy-badge">${
       score
-        ? `<span class=" rounded w-3/12 bg-red-600 text-center text-xs font-semibold p-1 text-white relative top-8 left-64">${score}% accuracy</span>`
+        ? `<span class=" rounded w-3/12 bg-red-600 text-center text-xs font-semibold p-1 text-white relative top-8 left-56 lg:top-8 lg:left-64">${
+            score * 100
+          }% accuracy</span>`
         : ""
     }</div>
       <figure>
-      <img class="rounded-lg h-48" src="${image_link[0]}"/>
+      <img class="rounded-lg h-48 w-80" src="${image_link?.[0]}"/>
       </figure>
       <div class="mt-8 text-center p-8">
         <p class="font-bold text-xl mb-4">${
