@@ -132,7 +132,11 @@ const displayAiModal = (data) => {
       </figure>
       <div class="mt-8 text-center p-8">
         <p class="font-bold text-xl mb-4">${input_output_examples[0].input}</p>
-        <p>${input_output_examples[0].output}</p>
+        <p>${
+          input_output_examples[0].output
+            ? input_output_examples[0].output
+            : "No! Not Yet! Take a break!!!"
+        }</p>
       </div>
     </div>
   `;
