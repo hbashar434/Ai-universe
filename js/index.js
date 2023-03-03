@@ -74,15 +74,19 @@ const displayAiModal = (data) => {
       <h1 class="text-xl font-semibold">${description}</h1>
       <div class="flex justify-between gap-2 my-4 font-semibold text-center">
         <div class="card bg-white text-green-500 p-2 w-full h-full">
-          <span class="mt-3">${pricing[0].price}</span> 
+          <span class="mt-2">${
+            pricing[0].price ? pricing[0].price : "Free of Cost"
+          }</span> 
           <span>${pricing[0].plan}</span>
         </div>
         <div class="card bg-white text-amber-500 p-2 w-full h-full">
-          <span class="mt-3" >${pricing[1].price}</span> 
+          <span class="mt-2" >${
+            pricing[1].price ? pricing[1].price : "Free of Cost"
+          }</span> 
           <span>${pricing[1].plan}</span>
         </div>
         <div class="card bg-white text-red-500 p-2 w-full h-full">
-          <span>${pricing[2].price}</span> 
+          <span>${pricing[2].price ? pricing[2].price : "Free of Cost"}</span> 
           <span>${pricing[2].plan}</span>
         </div>
       </div>
@@ -103,9 +107,15 @@ const displayAiModal = (data) => {
               <h1 class="text-xl font-semibold">Integrations</h1>
               <div class="ml-5 text-sm">
                   <ul class="list-disc">
-                      <li>${integrations[0]}</li>
-                      <li>${integrations[1]}</li>
-                      <li>${integrations[2]}</li>
+                      <li>${
+                        integrations[0] ? integrations[0] : "No data Found"
+                      }</li>
+                      <li>${
+                        integrations[1] ? integrations[1] : "No data Found"
+                      }</li>
+                      <li>${
+                        integrations[2] ? integrations[2] : "No data Found"
+                      }</li>
                   <ul>
               </div> 
           </div>
@@ -114,7 +124,9 @@ const displayAiModal = (data) => {
 
 
     <div class="card border p-4 modal-right">
-    <div id="accuracy" class="rounded w-3/12 bg-red-600 text-center text-xs font-semibold p-1 text-white relative top-8 left-64 ">${score}% accuracy</div>
+    <div id="accuracy-badge" class=" rounded w-3/12 bg-red-600 text-center text-xs font-semibold p-1 text-white relative top-8 left-64 ">${
+      score ? score : ""
+    }% accuracy</div>
       <figure>
       <img class="rounded-lg h-48" src="${image_link[0]}"/>
       </figure>
