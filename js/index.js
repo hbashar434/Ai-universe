@@ -72,15 +72,15 @@ const displayAiModal = (data) => {
     <div class="card border-2 border-red-300 bg-red-50 p-8 modal-left">
       <h1 class="text-xl font-semibold">${description}</h1>
       <div class="flex justify-between gap-2 my-4 font-semibold text-center">
-        <div class="card bg-white text-green-500 p-2 w-1/3 h-full">
-          <span>${pricing[0].price}</span> 
+        <div class="card bg-white text-green-500 p-2 w-full h-full">
+          <span class="mt-3">${pricing[0].price}</span> 
           <span>${pricing[0].plan}</span>
         </div>
-        <div class="card bg-white text-amber-500 p-2 w-1/3 h-full">
-          <span>${pricing[1].price}</span> 
+        <div class="card bg-white text-amber-500 p-2 w-full h-full">
+          <span class="mt-3" >${pricing[1].price}</span> 
           <span>${pricing[1].plan}</span>
         </div>
-        <div class="card bg-white text-red-500 p-2 w-1/3 h-full">
+        <div class="card bg-white text-red-500 p-2 w-full h-full">
           <span>${pricing[2].price}</span> 
           <span>${pricing[2].plan}</span>
         </div>
@@ -113,8 +113,10 @@ const displayAiModal = (data) => {
 
 
     <div class="card border p-4 modal-right">
-      <figure><img class="rounded-lg h-48" src="${image_link[0]}"/>
+      <figure>
+      <img class="rounded-lg h-48" src="${image_link[0]}"/>
       </figure>
+      <div class="badge badge-secondary relative bottom-44 left-80">NEW</div>
       <div class="mt-10 text-center p-8">
         <p class="font-bold text-xl mb-4">${input_output_examples[0].input}</p>
         <p>${input_output_examples[0].output}</p>
