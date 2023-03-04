@@ -20,7 +20,9 @@
     <!-- start header part -->
     <header class="lg:mx-20 my-4 text-center">
       <h1 class="text-3xl font-bold mb-4">AI Universe Hub</h1>
-      <button class="btn btn-error text-white">Sort By Date</button>
+      <button class="btn btn-error text-white" onclick="sortByDate()">
+        Sort By Date
+      </button>
     </header>
 
     <!-- start main part -->
@@ -49,24 +51,23 @@
       <!-- modal details start here -->
       <section class="mt-10">
         <!-- The button to open modal -->
-        
+
         <!-- Put this part before tag -->
         <input type="checkbox" id="my-modal-3" class="modal-toggle" />
         <div class="modal">
-          <div class="modal-box w-11/12 max-w-5xl h-screen">
+          <div class="modal-box w-11/12 max-w-5xl max-h-screen">
             <label
               for="my-modal-3"
-              class="btn btn-sm btn-circle absolute right-2 top-2"
+              class="btn btn-error btn-sm btn-circle absolute right-2 top-2"
               >✕</label
             >
-            <div id="modal-details" class="p-10 grid lg:grid-cols-2 gap-4 justify-around">
-
-            </div>
+            <div
+              id="modal-details"
+              class="p-10 grid lg:grid-cols-2 gap-4 justify-around"
+            ></div>
           </div>
         </div>
       </section>
-
-      <!-- accuracy badge -->
     </main>
     <!-- js file connection -->
     <script src="js/index.js"></script>

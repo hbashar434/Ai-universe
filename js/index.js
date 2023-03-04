@@ -40,15 +40,6 @@ const displayAiData = (data, cardLimit) => {
                     }</div>
                     <ol>
                 </div>
-
-
-                <div>
-                <ol class="list-decimal">
-                 
-                <ol>
-                </div>
-
-
                 <hr class="my-4">
                 <div class="flex justify-between items-center">
                     <div>
@@ -68,11 +59,11 @@ const displayAiData = (data, cardLimit) => {
   });
 };
 
-const fetchAiModal = (id) => {
+const fetchAiModal = async (id) => {
   const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => displayAiModal(data.data));
+  const res = await fetch(url);
+  const data = await res.json();
+  displayAiModal(data.data);
 };
 
 const displayAiModal = (data) => {
@@ -112,7 +103,7 @@ const displayAiModal = (data) => {
         </div>
       </div>
 
-        <div class="flex justify-between">
+        <div class="flex justify-between gap-6">
           <div>
               <h1 class="text-xl font-semibold">Features</h1>
               <div class="ml-5 text-sm">
@@ -193,6 +184,32 @@ const displayAiModal = (data) => {
 
 const seeMore = () => {
   loadAiData(0);
+  const showAll = document.getElementById("show-all");
+  showAll.classList.add("hidden");
+};
+
+/* sort by date */
+const sortByDate = async () => {
+  const url = `https://openapi.programming-hero.com/api/ai/tools`;
+  const res = await fetch(url);
+  const data = await res.json();
+  sortedDateData(data.data.tools);
+};
+
+const sortedDateData = (data) => {
+  data.sort((a, b) => {
+    const dateA = new Date(a.published_in);
+    const dateB = new Date(b.published_in);
+
+    if (dateA > dateB) {
+      return -1;
+    }
+    if (dateB > dateA) {
+      return 1;
+    }
+    return 0;
+  });
+  displayAiData(data);
   const showAll = document.getElementById("show-all");
   showAll.classList.add("hidden");
 };
