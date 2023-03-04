@@ -1,3 +1,4 @@
+let dataContainer = [];
 const loadAiData = (cardLimit = 6) => {
   document.getElementById("load-spinner").classList.remove("hidden");
   const url = `https://openapi.programming-hero.com/api/ai/tools`;
@@ -14,6 +15,7 @@ const displayAiData = (data, cardLimit) => {
   const cardContainer = document.getElementById("card-section");
   cardContainer.textContent = "";
   const dataLimit = data.slice(0, cardLimit ? cardLimit : data.length);
+  dataContainer = dataLimit;
   dataLimit.forEach((singleCard) => {
     const { id, name, image, features, published_in } = singleCard;
 
@@ -154,7 +156,6 @@ const displayAiModal = (data) => {
         </div>   
     </div>
 
-
     <div class="card border p-4 modal-right">
     <div id="accuracy-badge">${
       score
@@ -188,12 +189,8 @@ const seeMore = () => {
   showAll.classList.add("hidden");
 };
 
-/* sort by date */
-const sortByDate = async () => {
-  const url = `https://openapi.programming-hero.com/api/ai/tools`;
-  const res = await fetch(url);
-  const data = await res.json();
-  sortedDateData(data.data.tools);
+const sortByDate = () => {
+  sortedDateData(dataContainer);
 };
 
 const sortedDateData = (data) => {
@@ -210,8 +207,6 @@ const sortedDateData = (data) => {
     return 0;
   });
   displayAiData(data);
-  const showAll = document.getElementById("show-all");
-  showAll.classList.add("hidden");
 };
 
 loadAiData();
